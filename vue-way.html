@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+  </div>
+
+  <script>
+
+    var div = document.querySelector("#app")
+    var viewModel = {};
+
+    //Objectの役割を再定義するAPI
+    Object.defineProperty(viewModel, 'str', {
+
+      //Attrにアクセスする時操作を定義
+      get: function () {
+        console.log("Access")
+      },
+      // Attrに値を設定する時操作を定義
+      set: function (newValue) {
+
+        console.log("할당",newValue)
+        div.innerHTML = newValue
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
