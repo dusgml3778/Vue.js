@@ -18,21 +18,36 @@
     var div = document.querySelector("#app")
     var viewModel = {};
 
-    //Objectの役割を再定義するAPI
-    Object.defineProperty(viewModel, 'str', {
+    (function () {
 
-      //Attrにアクセスする時操作を定義
-      get: function () {
-        console.log("Access")
-      },
-      // Attrに値を設定する時操作を定義
-      set: function (newValue) {
+      function init() {
+        //Objectの役割を再定義するAPI
+        Object.defineProperty(viewModel, 'str', {
+          //Attrにアクセスする時操作を定義
+          get: function () {
+            console.log("Access")
+          },
+          // Attrに値を設定する時操作を定義
+          set: function (newValue) {
 
-        console.log("할당",newValue)
-        div.innerHTML = newValue
+            console.log("할당", newValue)
+            render(newValue);
+          }
+
+        });
+
       }
 
-    });
+      function render(newValue) {
+        div.innerHTML = newValue
+
+      }
+
+      init();
+
+    })();
+
+
 
   </script>
 
