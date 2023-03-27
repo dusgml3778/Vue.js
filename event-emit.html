@@ -10,42 +10,37 @@
 
 <body>
   <div id="app">
-    <app-header v-bind:propsdata="message"></app-header>
-    <app-content v-bind:propsdata="num"></app-content>
+    <app-header v-on:pass="logText"></app-header>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
 
     var appHeader = {
-
-      template: '<h1>{{ propsdata }}</h1>',
-      props: ['propsdata']
-
-    }
-
-    var appContent = {
-
-      template: '<div>{{ propsdata }}</div>',
-      props: ['propsdata']
-
+      template: '<button v-on:click="passEvent">Click me</button>',
+      methods: {
+        passEvent: function () {
+          this.$emit('pass');
+        }
+      }
     }
 
 
     new Vue({
+
       el: '#app',
       components: {
-        'app-header': appHeader,
-        'app-content': appContent
+        'app-header': appHeader
       },
-      data: { //rootのデータ
-        message: 'hi',
-        num: 10
+      methods: {
+        logText: function () {
+          console.log('hi')
+        }
       }
+
     })
 
-  </script>
 
+  </script>
 </body>
 
 </html>
