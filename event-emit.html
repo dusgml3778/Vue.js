@@ -11,6 +11,8 @@
 <body>
   <div id="app">
     <app-header v-on:pass="logText"></app-header>
+    <app-content v-on:add="addNum"></app-content>
+    <p>{{num}}</p>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
@@ -24,17 +26,34 @@
       }
     }
 
+    var appContent = {
+      template: '<button v-on:click="addNumber">add</button>',
+      methods: {
+        addNumber: function () {
+          this.$emit('add')
+        }
+      }
+    }
+
 
     new Vue({
 
       el: '#app',
       components: {
-        'app-header': appHeader
+        'app-header': appHeader,
+        'app-content': appContent
       },
       methods: {
         logText: function () {
           console.log('hi')
+        },
+        addNum: function () {
+          this.num = this.num + 1
         }
+
+      },
+      data: {
+        num: 10
       }
 
     })
