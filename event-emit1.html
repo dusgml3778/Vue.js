@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+
+    <app-header v-bind:propdata="name" v-on:alert="alertText"></app-header>
+    <app-center v-on:add="addNum" v-bind:propdata="num"></app-center>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+
+    var appHeader = {
+
+      template: "<button v-on:click='alertEvent'>Click me</button>",
+      props: ["propdata"],
+      methods: {
+        alertEvent: function () {
+          this.$emit("alert");
+        }
+      }
+
+    }
+
+    var appCenter = {
+
+      template: "<h1>{{propdata}}</h1><button v-on:click='check'>Add Num</button>",
+      props:["propdata"],
+      methods: {
+
+        check: function () {
+          this.$emit("add")
+        }
+
+      }
+
+    }
+
+    new Vue({
+
+      el: "#app",
+      components: {
+
+        "app-header": appHeader,
+        "app-center": appCenter
+
+      },
+      data: {
+
+        name: "kimmingye",
+        num: 10
+
+      },
+      methods: {
+
+        alertText: function () {
+          alert("test");
+        },
+        addNum: function () {
+          this.num = this.num + 1;
+        }
+
+
+      }
+
+
+    })
+
+
+  </script>
+
+</body>
+
+</html>

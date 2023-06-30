@@ -9,31 +9,46 @@
 </head>
 
 <body>
+
   <div id="app">
-    <app-header v-on:pass="logText"></app-header>
-    <app-content v-on:add="addNum"></app-content>
+    <app-header v-bind:propsdata="num"></app-header>
+    <app-medium v-on:increase="deleverNum"></app-medium>
+    <app-footer v-on:add="addNum"></app-footer>
     <p>{{num}}</p>
   </div>
+
+
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
   <script>
-    // v-on:하위컴포넌트에서 발생한 이벤트 이름=상위 컴포넌트의 메서드이름
+
     var appHeader = {
-      template: '<button v-on:click="passEvent">Click me</button>',
-      methods: {
-        passEvent: function () {
-          this.$emit('pass');
-        }
-      }
+      template: '<div>Top</div>',
+      props: ['propsdata']
     }
 
-    var appContent = {
-      template: '<button v-on:click="addNumber">add</button>',
+    var medium = {
+      template: '<div><button v-on:click = "increaseNum">Click</button></div>',
       methods: {
-        addNumber: function () {
+
+        increaseNum: function () {
+          this.$emit('increase', 10)
+        }
+
+      }
+
+    }
+    var footer = {
+
+      template: '<div><button v-on:click = "increaseNum">Add Num</button></div>',
+      methods: {
+        increaseNum: function () {
           this.$emit('add')
         }
       }
+
     }
+
 
 
     new Vue({
@@ -41,25 +56,25 @@
       el: '#app',
       components: {
         'app-header': appHeader,
-        'app-content': appContent
+        'app-medium': medium,
+        'app-footer': footer
+      },
+      data: {
+        num: 0
       },
       methods: {
-        logText: function () {
-          console.log('hi')
+        deleverNum: function (value) {
+          this.num = value;
         },
         addNum: function () {
           this.num = this.num + 1
         }
-
-      },
-      data: {
-        num: 10
       }
 
     })
 
-
   </script>
+
 </body>
 
 </html>
