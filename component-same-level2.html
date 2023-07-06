@@ -12,9 +12,8 @@
 
   <div id="app">
     <app-header v-bind:propsdata="num"></app-header>
-    <app-medium v-on:increase="deleverNum"></app-medium>
-    <app-footer v-on:add="addNum"></app-footer>
-    <p>{{num}}</p>
+    <app-content v-on:pass="deleverNum"></app-content>
+
   </div>
 
 
@@ -23,55 +22,42 @@
   <script>
 
     var appHeader = {
-      template: '<div>Top</div>',
-      props: ['propsdata']
-    }
 
-    var medium = {
-      template: '<div><button v-on:click = "increaseNum">Click</button></div>',
-      methods: {
-
-        increaseNum: function () {
-          this.$emit('increase', 10)
-        }
-
-      }
+      template: '<div>{{propsdata}}</div>',
+      props:['propsdata']
 
     }
-    var footer = {
 
-      template: '<div><button v-on:click = "increaseNum">Add Num</button></div>',
+    var appContent = {
+
+      template: '<div>content<button v-on:click="passNum">Pass</button></div>',
       methods: {
-        increaseNum: function () {
-          this.$emit('add')
+        passNum: function () {
+          this.$emit("pass", 10);
         }
       }
-
     }
-
-
 
     new Vue({
 
       el: '#app',
       components: {
         'app-header': appHeader,
-        'app-medium': medium,
-        'app-footer': footer
+        'app-content': appContent
+
       },
-      data: {
-        num: 0
-      },
-      methods: {
+      data : {
+
+        num:0
+        
+      },methods: {
         deleverNum: function (value) {
-          this.num = value;
-        },
-        addNum: function () {
-          this.num = this.num + 1
+          this.num += value;
         }
       }
 
     })
+
 
   </script>
 
