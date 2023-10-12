@@ -44,7 +44,8 @@
           // 페이지의 url이름
           path: "/login",
           // 해당 url에서 표시될 컴포넌트
-          component: LoginComponent
+          // ※注意 componentsではなくてcomponent なぜならurlにより表示するページは1しかないから
+          component: LoginComponent 
         },
         {
 
@@ -60,7 +61,7 @@
 
     new Vue({
       el: "#app",
-      router: rou
+      router: rou // routerの名前
     })
 
   </script>
