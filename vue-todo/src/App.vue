@@ -2,7 +2,7 @@
   <div id="app">
     <Todo-Header></Todo-Header>
     <Todo-Input v-on:addTodoItem="addOneItem"></Todo-Input>
-    <Todo-List v-bind:propsdata="todoItems"></Todo-List>
+    <Todo-List v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></Todo-List>
     <Todo-Footer></Todo-Footer>
   </div>
 </template>
@@ -25,6 +25,10 @@ export default {
       var obj = {completed:false , item:todoItem}
       localStorage.setItem(todoItem,JSON.stringify(obj));
       this.todoItems.push(obj);
+    },
+    removeOneItem: function(todoItem,index) {
+      localStorage.removeItem(todoItem.item); // todoItemはobjectなのでキーであるitemまで指定しないとlocalstorageで削除されない
+      this.todoItems.splice(index,1);
     }
   },
   created:function(){

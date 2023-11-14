@@ -18,8 +18,7 @@ export default {
   props:["propsdata"],
   methods: {
     removeTodo:function(todoItem, index){
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index,1);
+      this.$emit("removeItem", todoItem,index); // Appvueにイベントemitを送る App.vueで受け取って処理する。
     },
     toggleComplete:function(todoItem, index){
       todoItem.completed = !todoItem.completed;
